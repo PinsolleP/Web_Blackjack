@@ -8,6 +8,12 @@ const totalscore = document.getElementById('score');
 
 const rester = document.getElementById('rester');
 
+const resultat = document.getElementById('resultat');
+
+const nouvellePartie = document.getElementById('nouvellePartie');
+
+const totalScoreCroupier = document.getElementById('scoreCroupier');
+
 let score = 0;
 let jeuTermine = false;
 let scoreCroupier = 0;
@@ -48,17 +54,31 @@ rester.addEventListener('click', function() {
         document.getElementById('scoreCroupier').textContent = scoreCroupier
    }
    if (scoreCroupier > 21){
-        console.log("Gagné !");
+        resultat.textContent = "Gagné !";
    }
    else if (score > scoreCroupier){
-        console.log("Gagné !");
+        resultat.textContent = "Gagné !";
    }
    else if (score < scoreCroupier){
-        console.log("Perdu !");
+        resultat.textContent = "Perdu !";
    }
    else{
-        console.log("Egalité !");
+        resultat.textContent = "Egalité !";
    }
+});
+
+nouvellePartie.addEventListener('click', function(){
+    score = 0;
+    jeuTermine = false;
+    scoreCroupier = 0;
+    cartesJoueur = [];
+    cartesCroupier = [];
+
+    totalscore.textContent = "Score : 0";
+    totalScoreCroupier.textContent = "Score croupier : 0";
+    carteElement.textContent = "";
+    resultat.textContent = "";
+
 });
 
 function valeurCarte(card) {
@@ -82,12 +102,10 @@ function calculerScore(cartes){
         score = score + valeurCarte(card);
         }
     }
-    if (score > 21 && nombreAs >0){
+    while (score > 21 && nombreAs >0){
         score = score - 10;
+        nombreAs--;
     }
     return score;
 }
 
-console.log(calculerScore([5, "As", 8]));
-console.log(calculerScore([10, "As"]));
-console.log(calculerScore(["As", "As", 9]));
