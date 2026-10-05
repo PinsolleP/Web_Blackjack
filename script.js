@@ -14,12 +14,31 @@ const nouvellePartie = document.getElementById('nouvellePartie');
 
 const totalScoreCroupier = document.getElementById('scoreCroupier');
 
+const cartesCroupierElement = document.getElementById('cartesCroupier');
+
 let score = 0;
 let jeuTermine = false;
 let scoreCroupier = 0;
 let cartesJoueur = [];
 let cartesCroupier = [];
 
+function distribuerCartes(){
+    cartesJoueur = [];
+    cartesCroupier = [];
+
+    cartesJoueur.push(cards[Math.floor(Math.random() * cards.length)]);
+    cartesCroupier.push(cards[Math.floor(Math.random() * cards.length)]);
+    cartesJoueur.push(cards[Math.floor(Math.random() * cards.length)]);
+    cartesCroupier.push(cards[Math.floor(Math.random() * cards.length)]);
+
+    score = calculerScore(cartesJoueur);
+    totalscore.textContent = score;
+
+    carteElement.textContent = cartesJoueur.join(", ");
+    cartesCroupierElement.textContent = cartesCroupier[0] + ", ?";
+
+    totalScoreCroupier.textContent = "?";
+}
 
 button.addEventListener('click', function() {
 
@@ -31,7 +50,7 @@ button.addEventListener('click', function() {
 
     cartesJoueur.push(card);
 
-    carteElement.textContent = card;
+    carteElement.textContent = cartesJoueur.join(", ");
 
     score = calculerScore(cartesJoueur);
 
@@ -47,11 +66,20 @@ rester.addEventListener('click', function() {
 
    jeuTermine = true;
 
+   cartesCroupierElement.textContent = cartesCroupier.join(", ");
+
+   scoreCroupier = calculerScore(cartesCroupier);
+   totalScoreCroupier.textContent = scoreCroupier;
+
    while ( scoreCroupier < 17){
         const card = cards[Math.floor(Math.random() * cards.length)];
+
         cartesCroupier.push(card)
+
         scoreCroupier = calculerScore(cartesCroupier);
-        document.getElementById('scoreCroupier').textContent = scoreCroupier
+
+        cartesCroupierElement.textContent = cartesCroupier.join(", ");
+        totalScoreCroupier.textContent = scoreCroupier;
    }
    if (scoreCroupier > 21){
         resultat.textContent = "Gagné !";
@@ -71,13 +99,9 @@ nouvellePartie.addEventListener('click', function(){
     score = 0;
     jeuTermine = false;
     scoreCroupier = 0;
-    cartesJoueur = [];
-    cartesCroupier = [];
-
-    totalscore.textContent = "Score : 0";
-    totalScoreCroupier.textContent = "Score croupier : 0";
-    carteElement.textContent = "";
     resultat.textContent = "";
+
+    distribuerCartes();
 
 });
 
@@ -108,4 +132,6 @@ function calculerScore(cartes){
     }
     return score;
 }
+
+distribuerCartes();
 
