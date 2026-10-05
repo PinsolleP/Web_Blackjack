@@ -1,10 +1,10 @@
 const cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi", "As"];
 
-const button = document.getElementById('tirer');
+const tirer = document.getElementById('tirer');
 
-const carteElement = document.getElementById('carte');
+const cartesJoueurElement = document.getElementById('carte');
 
-const totalscore = document.getElementById('score');
+const totalScore = document.getElementById('score');
 
 const rester = document.getElementById('rester');
 
@@ -22,42 +22,46 @@ let scoreCroupier = 0;
 let cartesJoueur = [];
 let cartesCroupier = [];
 
+function tirerCarte(){
+    return cards[Math.floor(Math.random() * cards.length)];
+}
+
 function distribuerCartes(){
     cartesJoueur = [];
     cartesCroupier = [];
 
-    cartesJoueur.push(cards[Math.floor(Math.random() * cards.length)]);
-    cartesCroupier.push(cards[Math.floor(Math.random() * cards.length)]);
-    cartesJoueur.push(cards[Math.floor(Math.random() * cards.length)]);
-    cartesCroupier.push(cards[Math.floor(Math.random() * cards.length)]);
+    cartesJoueur.push(tirerCarte());
+    cartesCroupier.push(tirerCarte());
+    cartesJoueur.push(tirerCarte());
+    cartesCroupier.push(tirerCarte());
 
     score = calculerScore(cartesJoueur);
-    totalscore.textContent = score;
+    totalScore.textContent = score;
 
-    carteElement.textContent = cartesJoueur.join(", ");
+    cartesJoueurElement.textContent = cartesJoueur.join(", ");
     cartesCroupierElement.textContent = cartesCroupier[0] + ", ?";
 
     totalScoreCroupier.textContent = "?";
 }
 
-button.addEventListener('click', function() {
+tirer.addEventListener('click', function() {
 
     if (jeuTermine){
         return;
     }
 
-    const card = cards[Math.floor(Math.random() * cards.length)];
+    const card = tirerCarte();
 
     cartesJoueur.push(card);
 
-    carteElement.textContent = cartesJoueur.join(", ");
+    cartesJoueurElement.textContent = cartesJoueur.join(", ");
 
     score = calculerScore(cartesJoueur);
 
-    totalscore.textContent = score;
+    totalScore.textContent = score;
 
     if (score > 21){
-        console.log("Perdu !");
+        resultat.textContent = "Perdu !";
         jeuTermine = true;
     }
 });
@@ -72,9 +76,9 @@ rester.addEventListener('click', function() {
    totalScoreCroupier.textContent = scoreCroupier;
 
    while ( scoreCroupier < 17){
-        const card = cards[Math.floor(Math.random() * cards.length)];
+        const card = tirerCarte();
 
-        cartesCroupier.push(card)
+        cartesCroupier.push(card);
 
         scoreCroupier = calculerScore(cartesCroupier);
 
