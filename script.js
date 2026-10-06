@@ -51,7 +51,8 @@ let cartesJoueur = [];
 let cartesCroupier = [];
 
 function tirerCarte(){
-    return cards[Math.floor(Math.random() * cards.length)];
+    const index = Math.floor(Math.random() * cards.length);
+    return cards.splice(index, 1)[0];
 }
 
 function creerCarte(card){
@@ -93,43 +94,17 @@ function creerCarte(card){
 
 function afficherCarte(card, element, cacher = false){
 
-    const carte = document.createElement("div");
-    carte.classList.add("carte");
 
     if (cacher){
-        carte.classList.add("dos");
+        const carte = document.createElement("div");
+        carte.classList.add("carte", "dos");
         element.appendChild(carte);
         return;
     }
 
-    const valeur = document.createElement("span");
-    valeur.classList.add("valeur");
-
-    if (card.nom === "Valet") {
-            valeur.textContent = "J";
-        }
-        else if (card.nom === "Dame") {
-            valeur.textContent = "Q";
-        }
-        else if (card.nom === "Roi") {
-            valeur.textContent = "K";
-        }
-        else {
-            valeur.textContent = card.nom;
-        }
-
-        const couleur = document.createElement("span");
-        couleur.classList.add("couleur");
-        if (card.couleur === "♥" || card.couleur === "♦"){
-            couleur.classList.add("rouge");
-        }
-        couleur.textContent = card.couleur;
-
-        
-        carte.appendChild(valeur);
-        carte.appendChild(couleur);
-
-        element.appendChild(carte);
+    const carte = creerCarte(card);
+    element.appendChild(carte);
+    
     }
 
 function afficherCartes(cartes, element, cacherPremiere = false){
@@ -138,44 +113,15 @@ function afficherCartes(cartes, element, cacherPremiere = false){
 
     for ( let i = 0; i < cartes.length; i++){
 
-        const card = cartes[i];
-
-        const carte = document.createElement("div");
-        carte.classList.add("carte");
-        carte.style.animationDelay = `${i * 0.70}s`;
-
         if ( cacherPremiere && i === 0){
-            carte.classList.add("dos");
-            element.appendChild(carte);
+            const carteCachee = document.createElement("div");
+            carteCachee.classList.add("carte", "dos");
+            element.appendChild(carteCachee);
             continue;        
         }
 
-        const valeur = document.createElement("span");
-        valeur.classList.add("valeur");
-
-        if (card.nom === "Valet") {
-            valeur.textContent = "J";
-        }
-        else if (card.nom === "Dame") {
-            valeur.textContent = "Q";
-        }
-        else if (card.nom === "Roi") {
-            valeur.textContent = "K";
-        }
-        else {
-            valeur.textContent = card.nom;
-        }
-
-        const couleur = document.createElement("span");
-        couleur.classList.add("couleur");
-        if (card.couleur === "♥" || card.couleur === "♦"){
-            couleur.classList.add("rouge");
-        }
-        couleur.textContent = card.couleur;
-
-        
-        carte.appendChild(valeur);
-        carte.appendChild(couleur);
+        const carte = creerCarte(cartes[i]);
+        carte.style.animationDelay = `${i * 0.70}s`;
 
         element.appendChild(carte);
     }
@@ -296,11 +242,6 @@ nouvellePartie.addEventListener('click', function(){
 
 });
 
-function valeurCarte(card) {
-
-    return card.valeur;
-}
-
 function calculerScore(cartes){
     let score = 0;
     let nombreAs = 0;
@@ -310,7 +251,7 @@ function calculerScore(cartes){
             nombreAs++;
             score = score + 11;
         } else{
-        score = score + valeurCarte(card);
+        score = score + card.valeur;
         }
     }
     while (score > 21 && nombreAs >0){
