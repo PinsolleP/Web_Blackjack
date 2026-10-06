@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: #111;
+    font-family: Arial, sans-serif;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.table {
+    width: 90%;
+    max-width: 1000px;
+    min-height: 700px;
+
+    padding: 40px;
+
+    background: #075b3a;
+    border: 10px solid #4a2a16;
+    border-radius: 40px;
+
+    text-align: center;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+h1 {
+    margin-top: 0 0 40px;
+    font-size: 42px;
+    letter-spacing: 6px;
+}
+
+.zone {
+    margin: 35px 0;
+}
+
+.zone h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.cartes {
+    min-height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.zone p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.message {
+    min-height: 45px;
+}
+
+#resultat {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.actions {
+    margin-top: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+button {
+    padding: 14px 25px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+#tirer {
+    background: #d4af37;
+    color: #111;
+}
+
+#rester {
+    background: #eeeeee;
+    color: #111;
+}
+
+#nouvellePartie {
+    background: #222;
+    color: white;
+}
