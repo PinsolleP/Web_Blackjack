@@ -53,6 +53,16 @@ const fenetreRegles = document.getElementById('fenetreRegles');
 
 const fermerRegles = document.getElementById('fermerRegles');
 
+const accueil = document.getElementById('accueil');
+
+const pseudo = document.getElementById('pseudo');
+
+const jouer = document.getElementById('jouer');
+
+const bienvenue = document.getElementById('bienvenue');
+
+const nomJoueur = document.getElementById('nomJoueur');
+
 let score = 0;
 let jeuTermine = false;
 let scoreCroupier = 0;
@@ -297,8 +307,6 @@ function calculerScore(cartes){
     return score;
 }
 
-distribuerCartes();
-
 regles.addEventListener('click', function(){
     fenetreRegles.style.display = "flex";
 });
@@ -307,3 +315,18 @@ fermerRegles.addEventListener('click', function(){
     fenetreRegles.style.display = "none";
 });
 
+jouer.addEventListener('click', function(){
+
+    if (pseudo.value.trim() === ""){
+        return;
+    }
+
+    nomJoueur.textContent = pseudo.value;
+    bienvenue.textContent = "Bienvenue " + pseudo.value;
+
+    accueil.style.display = "none";
+    document.querySelector(".table").style.display = "block";
+
+    distribuerCartes();
+
+});
