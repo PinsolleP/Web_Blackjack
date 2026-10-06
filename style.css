@@ -34,9 +34,14 @@ body {
 }
 
 h1 {
-    margin-top: 0 0 40px;
-    font-size: 42px;
-    letter-spacing: 6px;
+    margin: 0 0 25px;
+
+    font-size: 46px;
+    letter-spacing: 8px;
+
+    color: #d4af37;
+
+    text-shadow: 2px 2px 4px #111;
 }
 
 .zone {
@@ -44,9 +49,14 @@ h1 {
 }
 
 .zone h2 {
-    margin-bottom: 15px;
-    font-size: 24px;
+    margin-bottom: 10px;
+
+    font-size: 18px;
     text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    color: #ddd;
 }
 
 .cartes {
@@ -98,11 +108,6 @@ h1 {
 
 .rouge {
     color: #d40000;
-}
-
-.zone p {
-    font-size: 20px;
-    font-weight: bold;
 }
 
 .message {
@@ -310,4 +315,22 @@ button:hover {
 
 .table {
     display: none;
+}
+
+#accueil h1 {
+    font-size: 32px;
+    letter-spacing: 5px;
+}
+
+.ligne-cartes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.score {
+    font-size: 14px;
+    color: #ccc;
+    font-weight: normal;
 }
