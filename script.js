@@ -284,7 +284,10 @@ nouvellePartie.addEventListener('click', function(){
     scoreCroupier = 0;
     resultat.textContent = "";
 
-    distribuerCartes();
+    mise = 0;
+    miseElement.textContent = "0 €";
+
+    partieEnCours = false;
 
 });
 
@@ -327,6 +330,46 @@ jouer.addEventListener('click', function(){
     accueil.style.display = "none";
     document.querySelector(".table").style.display = "block";
 
-    distribuerCartes();
+});
 
+let mise = 0;
+let partieEnCours = false;
+let solde = 1000;
+
+const miseElement = document.getElementById("mise");
+const soldeElement = document.getElementById("solde");
+const jetons = document.querySelectorAll(".jeton");
+const validerMise = document.getElementById("validerMise");
+
+jetons.forEach(function(jeton){
+
+    jeton.addEventListener("click", function(){
+
+        if (partieEnCours){
+            return;
+        }
+
+        mise += Number(jeton.dataset.valeur);
+
+        miseElement.textContent = mise + " €";
+
+    });
+});
+
+validerMise.addEventListener("click", function(){
+
+    if (mise === 0 || partieEnCours){
+        return;
+    }
+
+    if (mise > solde){
+        return;
+    }
+
+    solde -= mise;
+    soldeElement.textContent = solde;
+
+    partieEnCours = true;
+
+    distribuerCartes();
 });
