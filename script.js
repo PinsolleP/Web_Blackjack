@@ -18,15 +18,18 @@ const valeurs = [
 
 const cards = [];
 
-for (let couleur of couleurs){
-    for ( let valeur of valeurs){
-        cards.push({
-            nom: valeur.nom,
-            couleur: couleur,
-            valeur: valeur.valeur
-        });
+    cards.length = 0;
+
+    for (let couleur of couleurs){
+        for ( let valeur of valeurs){
+            cards.push({
+                nom: valeur.nom,
+                couleur: couleur,
+                valeur: valeur.valeur
+            });
+        }
     }
-}
+
 
 const tirer = document.getElementById('tirer');
 
@@ -51,8 +54,7 @@ let cartesJoueur = [];
 let cartesCroupier = [];
 
 function tirerCarte(){
-    const index = Math.floor(Math.random() * cards.length);
-    return cards.splice(index, 1)[0];
+    return cards[Math.floor(Math.random() * cards.length)];
 }
 
 function creerCarte(card){
@@ -64,32 +66,31 @@ function creerCarte(card){
     valeur.classList.add("valeur");
 
     if (card.nom === "Valet") {
-            valeur.textContent = "J";
-        }
-        else if (card.nom === "Dame") {
-            valeur.textContent = "Q";
-        }
-        else if (card.nom === "Roi") {
-            valeur.textContent = "K";
-        }
-        else {
-            valeur.textContent = card.nom;
-        }
+         valeur.textContent = "J";
+    }
+    else if (card.nom === "Dame") {
+        valeur.textContent = "Q";
+    }
+    else if (card.nom === "Roi") {
+         valeur.textContent = "K";
+    }
+    else {
+         valeur.textContent = card.nom;
+    }
 
-        const couleur = document.createElement("span");
-        couleur.classList.add("couleur");
+    const couleur = document.createElement("span");
+    couleur.classList.add("couleur");
 
-        if (card.couleur === "♥" || card.couleur === "♦"){
-            couleur.classList.add("rouge");
-        }
+    if (card.couleur === "♥" || card.couleur === "♦"){
+         couleur.classList.add("rouge");
+    }
 
-        couleur.textContent = card.couleur;
+    couleur.textContent = card.couleur;
+ 
+    carte.appendChild(valeur);
+    carte.appendChild(couleur);
 
-        
-        carte.appendChild(valeur);
-        carte.appendChild(couleur);
-
-        return carte;
+    return carte;
 }
 
 function afficherCarte(card, element, cacher = false){
