@@ -71,6 +71,8 @@ h1 {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 
     font-weight: bold;
+
+    animation: apparition 0.3s ease-out;
 }
 
 .valeur {
@@ -165,10 +167,6 @@ button:hover {
     content: "♠ ♥";
     color: white;
     font-size: 22px;
-}
-
-.carte {
-    animation: apparition 0.3s ease-out;
 }
 
 @keyframes apparition {
