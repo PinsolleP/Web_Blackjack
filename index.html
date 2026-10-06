@@ -3,27 +3,49 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackjack</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <h1>Blackjack</h1>
 
-  <button id="tirer">Tirer</button>
+  <main class="table">
 
-  <button id="rester">Rester</button>
+    <h1>♠ Blackjack ♥</h1>
 
-  <button id="nouvellePartie">Nouvelle partie</button>
+    <section class="zone">
+      <h2>Croupier</h2>
 
-  <p id="carte"></p>
+      <div id="cartesCroupier" class="cartes"></div>
 
-  <p id="score">Score : 0</p>
+      <p>Score : <span id="scoreCroupier">?</span></p>
+    </section>
 
-  <p id="scoreCroupier">Score croupier : 0</p>
 
-  <p id="cartesCroupier"></p>
+    <section class="message">
+      <p id="resultat"></p>
+    </section>
 
-  <p id="resultat"></p>
+    <section class="zone">
+      <h2>Joueur</h2>
+
+      <div id="carte" class="cartes"></div>
+
+      <p>Score : <span id="score">0</span></p>
+    </section>
+
+
+    <section class="actions"></section>
+      <button id="tirer">Tirer</button>
+      <button id="rester">Rester</button>
+      <button id="nouvellePartie">Nouvelle partie</button>
+    </section>
+  
+  </main>
 
   <script src="script.js"></script>
+
 </body>
 </html>
