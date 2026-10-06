@@ -54,6 +54,47 @@ function tirerCarte(){
     return cards[Math.floor(Math.random() * cards.length)];
 }
 
+function afficherCarte(card, element, cacher = false){
+
+    const carte = document.createElement("div");
+    carte.classList.add("carte");
+
+    if (cacher){
+        carte.classList.add("dos");
+        element.appendChild(carte);
+        return;
+    }
+
+    const valeur = document.createElement("span");
+    valeur.classList.add("valeur");
+
+    if (card.nom === "Valet") {
+            valeur.textContent = "J";
+        }
+        else if (card.nom === "Dame") {
+            valeur.textContent = "Q";
+        }
+        else if (card.nom === "Roi") {
+            valeur.textContent = "K";
+        }
+        else {
+            valeur.textContent = card.nom;
+        }
+
+        const couleur = document.createElement("span");
+        couleur.classList.add("couleur");
+        if (card.couleur === "♥" || card.couleur === "♦"){
+            couleur.classList.add("rouge");
+        }
+        couleur.textContent = card.couleur;
+
+        
+        carte.appendChild(valeur);
+        carte.appendChild(couleur);
+
+        element.appendChild(carte);
+    }
+
 function afficherCartes(cartes, element, cacherPremiere = false, nombreCartes = cartes.length){
 
     element.innerHTML = "";
@@ -154,7 +195,7 @@ tirer.addEventListener('click', function() {
 
     cartesJoueur.push(card);
 
-    afficherCartes(cartesJoueur, cartesJoueurElement);
+    afficherCarte(card, cartesJoueurElement);
 
     score = calculerScore(cartesJoueur);
 
@@ -178,6 +219,8 @@ rester.addEventListener('click', function() {
     }
 
     jeuTermine = true;
+
+    cartesCroupierElement.innerHTML = "";
 
     afficherCartes(cartesCroupier, cartesCroupierElement);
 
