@@ -54,6 +54,43 @@ function tirerCarte(){
     return cards[Math.floor(Math.random() * cards.length)];
 }
 
+function creerCarte(card){
+
+    const carte = document.createElement("div");
+    carte.classList.add("carte");
+
+    const valeur = document.createElement("span");
+    valeur.classList.add("valeur");
+
+    if (card.nom === "Valet") {
+            valeur.textContent = "J";
+        }
+        else if (card.nom === "Dame") {
+            valeur.textContent = "Q";
+        }
+        else if (card.nom === "Roi") {
+            valeur.textContent = "K";
+        }
+        else {
+            valeur.textContent = card.nom;
+        }
+
+        const couleur = document.createElement("span");
+        couleur.classList.add("couleur");
+
+        if (card.couleur === "♥" || card.couleur === "♦"){
+            couleur.classList.add("rouge");
+        }
+
+        couleur.textContent = card.couleur;
+
+        
+        carte.appendChild(valeur);
+        carte.appendChild(couleur);
+
+        return carte;
+}
+
 function afficherCarte(card, element, cacher = false){
 
     const carte = document.createElement("div");
@@ -95,11 +132,11 @@ function afficherCarte(card, element, cacher = false){
         element.appendChild(carte);
     }
 
-function afficherCartes(cartes, element, cacherPremiere = false, nombreCartes = cartes.length){
+function afficherCartes(cartes, element, cacherPremiere = false){
 
     element.innerHTML = "";
 
-    for ( let i = 0; i < nombreCartes; i++){
+    for ( let i = 0; i < cartes.length; i++){
 
         const card = cartes[i];
 
@@ -155,8 +192,6 @@ function distribuerCartes(){
 
     score = calculerScore(cartesJoueur);
     totalScore.textContent = score;
-
-    afficherCartes(cartesJoueur, cartesJoueurElement);
 
     afficherCartes(cartesJoueur, cartesJoueurElement);
     afficherCartes(cartesCroupier, cartesCroupierElement, true);
@@ -231,10 +266,10 @@ rester.addEventListener('click', function() {
         const card = tirerCarte();
 
         cartesCroupier.push(card);
+        afficherCarte(card, cartesCroupierElement)
 
         scoreCroupier = calculerScore(cartesCroupier);
 
-        afficherCartes(cartesCroupier, cartesCroupierElement);
         totalScoreCroupier.textContent = scoreCroupier;
     }
     if (scoreCroupier > 21){
