@@ -28,9 +28,6 @@ for (let couleur of couleurs){
     }
 }
 
-console.log(cards);
-console.log(cards.length);
-
 const tirer = document.getElementById('tirer');
 
 const cartesJoueurElement = document.getElementById('carte');
@@ -57,6 +54,55 @@ function tirerCarte(){
     return cards[Math.floor(Math.random() * cards.length)];
 }
 
+function afficherCartes(cartes, element, cacherPremiere = false, nombreCartes = cartes.length){
+
+    element.innerHTML = "";
+
+    for ( let i = 0; i < nombreCartes; i++){
+
+        const card = cartes[i];
+
+        const carte = document.createElement("div");
+        carte.classList.add("carte");
+        carte.style.animationDelay = `${i * 0.70}s`;
+
+        if ( cacherPremiere && i === 0){
+            carte.classList.add("dos");
+            element.appendChild(carte);
+            continue;        
+        }
+
+        const valeur = document.createElement("span");
+        valeur.classList.add("valeur");
+
+        if (card.nom === "Valet") {
+            valeur.textContent = "J";
+        }
+        else if (card.nom === "Dame") {
+            valeur.textContent = "Q";
+        }
+        else if (card.nom === "Roi") {
+            valeur.textContent = "K";
+        }
+        else {
+            valeur.textContent = card.nom;
+        }
+
+        const couleur = document.createElement("span");
+        couleur.classList.add("couleur");
+        if (card.couleur === "♥" || card.couleur === "♦"){
+            couleur.classList.add("rouge");
+        }
+        couleur.textContent = card.couleur;
+
+        
+        carte.appendChild(valeur);
+        carte.appendChild(couleur);
+
+        element.appendChild(carte);
+    }
+}
+
 function distribuerCartes(){
     cartesJoueur = [];
     cartesCroupier = [];
@@ -69,8 +115,10 @@ function distribuerCartes(){
     score = calculerScore(cartesJoueur);
     totalScore.textContent = score;
 
-    cartesJoueurElement.textContent = cartesJoueur.join(", ");
-    cartesCroupierElement.textContent = cartesCroupier[0] + ", ?";
+    afficherCartes(cartesJoueur, cartesJoueurElement);
+
+    afficherCartes(cartesJoueur, cartesJoueurElement);
+    afficherCartes(cartesCroupier, cartesCroupierElement, true);
     totalScoreCroupier.textContent = "?";
 
     scoreCroupier = calculerScore(cartesCroupier);
@@ -80,7 +128,7 @@ function distribuerCartes(){
 
     if (blackjackJoueur || blackjackCroupier){
 
-        cartesCroupierElement.textContent = cartesCroupier.join(", ");
+        afficherCartes(cartesCroupier, cartesCroupierElement);
         totalScoreCroupier.textContent = scoreCroupier;
 
         if (blackjackJoueur && blackjackCroupier){
@@ -106,7 +154,7 @@ tirer.addEventListener('click', function() {
 
     cartesJoueur.push(card);
 
-    cartesJoueurElement.textContent = cartesJoueur.join(", ");
+    afficherCartes(cartesJoueur, cartesJoueurElement);
 
     score = calculerScore(cartesJoueur);
 
@@ -116,7 +164,7 @@ tirer.addEventListener('click', function() {
         resultat.textContent = "Perdu !";
         jeuTermine = true;
 
-        cartesCroupierElement.textContent = cartesCroupier.join(", ");
+        afficherCartes(cartesCroupier, cartesCroupierElement);
 
         scoreCroupier = calculerScore(cartesCroupier);
         totalScoreCroupier.textContent = scoreCroupier;
@@ -131,7 +179,7 @@ rester.addEventListener('click', function() {
 
     jeuTermine = true;
 
-    cartesCroupierElement.textContent = cartesCroupier.join(", ");
+    afficherCartes(cartesCroupier, cartesCroupierElement);
 
     scoreCroupier = calculerScore(cartesCroupier);
     totalScoreCroupier.textContent = scoreCroupier;
@@ -143,7 +191,7 @@ rester.addEventListener('click', function() {
 
         scoreCroupier = calculerScore(cartesCroupier);
 
-        cartesCroupierElement.textContent = cartesCroupier.join(", ");
+        afficherCartes(cartesCroupier, cartesCroupierElement);
         totalScoreCroupier.textContent = scoreCroupier;
     }
     if (scoreCroupier > 21){
@@ -172,11 +220,7 @@ nouvellePartie.addEventListener('click', function(){
 
 function valeurCarte(card) {
 
-    if (card === "Valet" || card ==="Dame" || card === "Roi"){
-        return 10;
-
-    } 
-    return card;
+    return card.valeur;
 }
 
 function calculerScore(cartes){
@@ -184,7 +228,7 @@ function calculerScore(cartes){
     let nombreAs = 0;
 
     for( let card of cartes){
-        if (card === "As"){
+        if (card.nom === "As"){
             nombreAs++;
             score = score + 11;
         } else{
