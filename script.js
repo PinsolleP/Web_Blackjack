@@ -47,6 +47,12 @@ const totalScoreCroupier = document.getElementById('scoreCroupier');
 
 const cartesCroupierElement = document.getElementById('cartesCroupier');
 
+const regles = document.getElementById('regles');
+
+const fenetreRegles = document.getElementById('fenetreRegles');
+
+const fermerRegles = document.getElementById('fermerRegles');
+
 let score = 0;
 let jeuTermine = false;
 let scoreCroupier = 0;
@@ -292,4 +298,12 @@ function calculerScore(cartes){
 }
 
 distribuerCartes();
+
+regles.addEventListener('click', function(){
+    fenetreRegles.style.display = "flex";
+});
+
+fermerRegles.addEventListener('click', function(){
+    fenetreRegles.style.display = "none";
+});
 
