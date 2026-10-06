@@ -334,3 +334,69 @@ button:hover {
     color: #ccc;
     font-weight: normal;
 }
+
+.argent {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    margin: 15px 0;
+
+    font-size: 15px;
+    color: #ddd;
+}
+
+.jetons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    margin: 15px 0;
+}
+
+.jeton {
+    width: 55px;
+    height: 55px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: #eee;
+    color: #111;
+
+    border: 4px dashed #333;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.jeton:hover {
+    transform: scale(1.08);
+}
+
+#validerMise {
+    padding: 8px 15px;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.jeton[data-valeur="10"] {
+    background: #c62828;
+    color: white;
+}
+
+.jeton[data-valeur="25"] {
+    background: #2e7d32;
+    color: white;
+}
+
+.jeton[data-valeur="50"] {
+    background: #1565c0;
+    color: white;
+}
+
+.jeton[data-valeur="100"] {
+    background: #111;
+    color: white;
+}
