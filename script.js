@@ -1,4 +1,35 @@
-const cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi", "As"];
+const couleurs = ["♥", "♦", "♣", "♠"];
+
+const valeurs = [
+    { nom: "2", valeur: 2 },
+    { nom: "3", valeur: 3 },
+    { nom: "4", valeur: 4 },
+    { nom: "5", valeur: 5 },
+    { nom: "6", valeur: 6 },
+    { nom: "7", valeur: 7 },
+    { nom: "8", valeur: 8 },
+    { nom: "9", valeur: 9 },
+    { nom: "10", valeur: 10 },
+    { nom: "Valet", valeur: 10 },
+    { nom: "Dame", valeur: 10 },
+    { nom: "Roi", valeur: 10 },
+    { nom: "As", valeur: 11 }
+];
+
+const cards = [];
+
+for (let couleur of couleurs){
+    for ( let valeur of valeurs){
+        cards.push({
+            nom: valeur.nom,
+            couleur: couleur,
+            valeur: valeur.valeur
+        });
+    }
+}
+
+console.log(cards);
+console.log(cards.length);
 
 const tirer = document.getElementById('tirer');
 
