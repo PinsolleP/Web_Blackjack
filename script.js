@@ -63,6 +63,8 @@ const bienvenue = document.getElementById('bienvenue');
 
 const nomJoueur = document.getElementById('nomJoueur');
 
+const doubler = document.getElementById("doubler");
+
 let score = 0;
 let jeuTermine = false;
 let scoreCroupier = 0;
@@ -191,6 +193,10 @@ function distribuerCartes(){
         const blackjackJoueur = score === 21 && cartesJoueur.length === 2;
         const blackjackCroupier = scoreCroupier === 21 && cartesCroupier.length === 2;
 
+        if ((score === 9 || score === 10 || score === 11) && !blackjackCroupier) {
+            doubler.style.display = "inline-block";
+        }
+
         if (blackjackJoueur || blackjackCroupier){
 
             afficherCartes(cartesCroupier, cartesCroupierElement);
@@ -198,9 +204,11 @@ function distribuerCartes(){
 
             if (blackjackJoueur && blackjackCroupier){
                 resultat.textContent = "Egalité !";
+                payerGain(1);
             }
             else if (blackjackJoueur){
                 resultat.textContent = "Blackjack ! vous gagnez !";
+                payerGain(2.5);
             }
             else{
                 resultat.textContent = "Blackjack du croupier ! vous perdez !";
@@ -266,15 +274,18 @@ rester.addEventListener('click', function() {
     }
     if (scoreCroupier > 21){
         resultat.textContent = "Gagné !";
+        payerGain(2);
     }
     else if (score > scoreCroupier){
         resultat.textContent = "Gagné !";
+        payerGain(2);
     }
     else if (score < scoreCroupier){
         resultat.textContent = "Perdu !";
     }
     else{
         resultat.textContent = "Egalité !";
+        payerGain(1);
     }
 });
 
@@ -308,6 +319,40 @@ function calculerScore(cartes){
         nombreAs--;
     }
     return score;
+}
+
+function scoresPossibles(cartes){
+
+    let score = 0;
+    let nombreAs = 0;
+
+    for (let card of cartes){
+
+        if (card.nom === "As"){
+            nombreAs++;
+            score += 11;
+        } else {
+            score += card.valeur;
+        }
+    }
+
+    const scores = [score];
+
+    while (nombreAs > 0){
+        score -= 10;
+        nombreAs--;
+
+        scores.push(score);
+    }
+
+    return scores;
+}
+
+function payerGain(multiplicateur){
+
+    solde += mise * multiplicateur;
+
+    soldeElement.textContent = solde;
 }
 
 regles.addEventListener('click', function(){
