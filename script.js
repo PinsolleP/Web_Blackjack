@@ -122,7 +122,6 @@ function afficherCartes(cartes, element, cacherPremiere = false){
         }
 
         const carte = creerCarte(cartes[i]);
-        carte.style.animationDelay = `${i * 0.70}s`;
 
         element.appendChild(carte);
     }
@@ -132,40 +131,70 @@ function distribuerCartes(){
     cartesJoueur = [];
     cartesCroupier = [];
 
-    cartesJoueur.push(tirerCarte());
-    cartesCroupier.push(tirerCarte());
-    cartesJoueur.push(tirerCarte());
-    cartesCroupier.push(tirerCarte());
+    cartesJoueurElement.innerHTML = "";
+    cartesCroupierElement.innerHTML = "";
 
-    score = calculerScore(cartesJoueur);
-    totalScore.textContent = score;
-
-    afficherCartes(cartesJoueur, cartesJoueurElement);
-    afficherCartes(cartesCroupier, cartesCroupierElement, true);
+    totalScore.textContent = "0";
     totalScoreCroupier.textContent = "?";
 
-    scoreCroupier = calculerScore(cartesCroupier);
+    setTimeout(() => {
+        const card = tirerCarte();
 
-    const blackjackJoueur = score === 21 && cartesJoueur.length === 2;
-    const blackjackCroupier = scoreCroupier === 21 && cartesCroupier.length === 2;
+        cartesJoueur.push(card);
+        afficherCarte(card, cartesJoueurElement);
 
-    if (blackjackJoueur || blackjackCroupier){
+    }, 300);
 
-        afficherCartes(cartesCroupier, cartesCroupierElement);
-        totalScoreCroupier.textContent = scoreCroupier;
+    setTimeout(() => {
+        const card = tirerCarte();
 
-        if (blackjackJoueur && blackjackCroupier){
-            resultat.textContent = "Egalité !";
+        cartesCroupier.push(card);
+        afficherCarte(card, cartesCroupierElement, true);
+
+    }, 900);
+
+    setTimeout(() => {
+        const card = tirerCarte();
+
+        cartesJoueur.push(card);
+        afficherCarte(card, cartesJoueurElement);
+
+        score = calculerScore(cartesJoueur);
+        totalScore.textContent = score;
+
+    }, 1500);
+
+    setTimeout(() => {
+        const card = tirerCarte();
+
+        cartesCroupier.push(card);
+        afficherCarte(card, cartesCroupierElement);
+
+        scoreCroupier = calculerScore(cartesCroupier);
+
+        const blackjackJoueur = score === 21 && cartesJoueur.length === 2;
+        const blackjackCroupier = scoreCroupier === 21 && cartesCroupier.length === 2;
+
+        if (blackjackJoueur || blackjackCroupier){
+
+            afficherCartes(cartesCroupier, cartesCroupierElement);
+            totalScoreCroupier.textContent = scoreCroupier;
+
+            if (blackjackJoueur && blackjackCroupier){
+                resultat.textContent = "Egalité !";
+            }
+            else if (blackjackJoueur){
+                resultat.textContent = "Blackjack ! vous gagnez !";
+            }
+            else{
+                resultat.textContent = "Blackjack du croupier ! vous perdez !";
+            }
+
+            jeuTermine = true;
         }
-        else if (blackjackJoueur){
-            resultat.textContent = "Blackjack ! vous gagnez !";
-        }
-        else{
-            resultat.textContent = "Blackjack du croupier ! vous perdez !";
-        }
-        jeuTermine = true;
-        }
-    }
+
+    }, 2100);
+}
 
 tirer.addEventListener('click', function() {
 
@@ -252,11 +281,11 @@ function calculerScore(cartes){
             nombreAs++;
             score = score + 11;
         } else{
-        score = score + card.valeur;
+            score += card.valeur;
         }
     }
     while (score > 21 && nombreAs >0){
-        score = score - 10;
+        score -= 10;
         nombreAs--;
     }
     return score;
