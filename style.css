@@ -400,3 +400,7 @@ button:hover {
     background: #111;
     color: white;
 }
+
+#doubler {
+    display: none;
+}
