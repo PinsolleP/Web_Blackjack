@@ -38,6 +38,11 @@ function distribuerCartes(){
     score = calculerScore(cartesJoueur);
     totalScore.textContent = score;
 
+    if (score === 21 && cartesJoueur.length === 2){
+        resultat.textContent = "Blackjack !";
+        jeuTermine = true;
+    }
+
     cartesJoueurElement.textContent = cartesJoueur.join(", ");
     cartesCroupierElement.textContent = cartesCroupier[0] + ", ?";
 
@@ -63,19 +68,28 @@ tirer.addEventListener('click', function() {
     if (score > 21){
         resultat.textContent = "Perdu !";
         jeuTermine = true;
+
+        cartesCroupierElement.textContent = cartesCroupier.join(", ");
+
+        scoreCroupier = calculerScore(cartesCroupier);
+        totalScoreCroupier.textContent = scoreCroupier;
     }
 });
 
 rester.addEventListener('click', function() {
 
-   jeuTermine = true;
+    if (jeuTermine){
+        return;
+    }
 
-   cartesCroupierElement.textContent = cartesCroupier.join(", ");
+    jeuTermine = true;
 
-   scoreCroupier = calculerScore(cartesCroupier);
-   totalScoreCroupier.textContent = scoreCroupier;
+    cartesCroupierElement.textContent = cartesCroupier.join(", ");
 
-   while ( scoreCroupier < 17){
+    scoreCroupier = calculerScore(cartesCroupier);
+    totalScoreCroupier.textContent = scoreCroupier;
+
+    while ( scoreCroupier < 17){
         const card = tirerCarte();
 
         cartesCroupier.push(card);
@@ -84,19 +98,19 @@ rester.addEventListener('click', function() {
 
         cartesCroupierElement.textContent = cartesCroupier.join(", ");
         totalScoreCroupier.textContent = scoreCroupier;
-   }
-   if (scoreCroupier > 21){
+    }
+    if (scoreCroupier > 21){
         resultat.textContent = "Gagné !";
-   }
-   else if (score > scoreCroupier){
+    }
+    else if (score > scoreCroupier){
         resultat.textContent = "Gagné !";
-   }
-   else if (score < scoreCroupier){
+    }
+    else if (score < scoreCroupier){
         resultat.textContent = "Perdu !";
-   }
-   else{
+    }
+    else{
         resultat.textContent = "Egalité !";
-   }
+    }
 });
 
 nouvellePartie.addEventListener('click', function(){
