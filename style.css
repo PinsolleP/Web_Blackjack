@@ -17,7 +17,67 @@ body {
 
 }
 
+#accueil {
+    width: 90%;
+    max-width: 500px;
+
+    padding: 50px;
+
+    background: #075b3a;
+    border: 10px solid #4a2a16;
+    border-radius: 40px;
+
+    text-align: center;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+#accueil h1 {
+    margin-bottom: 40px;
+
+    font-size: 32px;
+    letter-spacing: 5px;
+}
+
+#accueil p {
+    font-size: 22px;
+}
+
+#accueil label {
+    display: block;
+
+    margin: 30px 0 10px;
+
+    font-weight: bold;
+}
+
+#pseudo {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    text-align: center;
+}
+
+#jouer {
+    margin-top: 25px;
+
+    padding: 14px 40px;
+
+    background: #d4af37;
+    color: #111;
+
+    font-size: 18px;
+}
+
 .table {
+    display: none;
+
     width: 90%;
     max-width: 1000px;
     min-height: 700px;
@@ -68,6 +128,13 @@ h1 {
     gap: 15px;
 }
 
+.ligne-cartes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 .carte {
     width: 80px;
     height: 115px;
@@ -108,6 +175,24 @@ h1 {
 
 .rouge {
     color: #d40000;
+}
+
+.dos {
+    background: #173b8f;
+    border: 5px solid white;
+    box-shadow: inset 0 0 0 3px #173b8f;
+}
+
+.dos::after {
+    content: "♠ ♥";
+    color: white;
+    font-size: 22px;
+}
+
+.score {
+    font-size: 14px;
+    color: #ccc;
+    font-weight: normal;
 }
 
 .message {
@@ -163,29 +248,78 @@ button:hover {
     color: white;
 }
 
-.dos {
-    background: #173b8f;
-    border: 5px solid white;
-    box-shadow: inset 0 0 0 3px #173b8f;
+#doubler {
+    display: none;
 }
 
-.dos::after {
-    content: "♠ ♥";
+.argent {
+    gap: 30px;
+
+    font-size: 15px;
+    color: #ddd;
+}
+
+.argent,
+.jetons {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.jetons {
+    gap: 10px;
+}
+
+.jeton {
+    width: 55px;
+    height: 55px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: #eee;
+    color: #111;
+
+    border: 4px dashed #333;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.jeton:hover {
+    transform: scale(1.08);
+}
+
+#validerMise {
+    padding: 8px 15px;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.jeton[data-valeur="10"],
+.jeton[data-valeur="25"],
+.jeton[data-valeur="50"],
+.jeton[data-valeur="100"] {
     color: white;
-    font-size: 22px;
 }
 
-@keyframes apparition {
-    from {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+.jeton[data-valeur="10"] {
+    background: #c62828;
 }
+
+.jeton[data-valeur="25"] {
+    background: #2e7d32;
+}
+
+.jeton[data-valeur="50"] {
+    background: #1565c0;
+}
+
+.jeton[data-valeur="100"] {
+    background: #111;
+}
+
 
 #fenetreRegles {
     display: none;
@@ -245,162 +379,14 @@ button:hover {
     font-size: 28px;
 }
 
-#accueil {
-    width: 90%;
-    max-width: 500px;
+@keyframes apparition {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
 
-    padding: 50px;
-
-    background: #075b3a;
-    border: 10px solid #4a2a16;
-    border-radius: 40px;
-
-    text-align: center;
-
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-}
-
-#accueil h1 {
-    margin-bottom: 40px;
-
-    font-size: 42px;
-    letter-spacing: 6px;
-}
-
-#accueil p {
-    font-size: 22px;
-}
-
-#accueil label {
-    display: block;
-
-    margin: 30px 0 10px;
-
-    font-weight: bold;
-}
-
-#pseudo {
-    width: 100%;
-
-    padding: 14px;
-
-    border: none;
-    border-radius: 8px;
-
-    font-size: 16px;
-
-    text-align: center;
-}
-
-#jouer {
-    margin-top: 25px;
-
-    padding: 14px 40px;
-
-    background: #d4af37;
-    color: #111;
-
-    border: none;
-    border-radius: 10px;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-#jouer:hover {
-    transform: translateY(-2px);
-}
-
-.table {
-    display: none;
-}
-
-#accueil h1 {
-    font-size: 32px;
-    letter-spacing: 5px;
-}
-
-.ligne-cartes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.score {
-    font-size: 14px;
-    color: #ccc;
-    font-weight: normal;
-}
-
-.argent {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-
-    margin: 15px 0;
-
-    font-size: 15px;
-    color: #ddd;
-}
-
-.jetons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-
-    margin: 15px 0;
-}
-
-.jeton {
-    width: 55px;
-    height: 55px;
-
-    padding: 0;
-
-    border-radius: 50%;
-
-    background: #eee;
-    color: #111;
-
-    border: 4px dashed #333;
-
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.jeton:hover {
-    transform: scale(1.08);
-}
-
-#validerMise {
-    padding: 8px 15px;
-    font-size: 13px;
-    margin-left: 10px;
-}
-
-.jeton[data-valeur="10"] {
-    background: #c62828;
-    color: white;
-}
-
-.jeton[data-valeur="25"] {
-    background: #2e7d32;
-    color: white;
-}
-
-.jeton[data-valeur="50"] {
-    background: #1565c0;
-    color: white;
-}
-
-.jeton[data-valeur="100"] {
-    background: #111;
-    color: white;
-}
-
-#doubler {
-    display: none;
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
