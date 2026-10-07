@@ -11,6 +11,7 @@
 
 <body>
 
+  <!-- Accueil -->
   <section id="accueil">
     <h1>♠ BLACKJACK ♥</h1>
 
@@ -23,12 +24,14 @@
     <button id="jouer">Jouer</button>
   </section>
 
+  <!-- Table de Blackjack -->
   <main class="table">
 
     <h1>♠ Blackjack ♥</h1>
 
     <p id="bienvenue"></p>
 
+    <!-- Croupier -->
     <section class="zone">
       <h2>Croupier</h2>
 
@@ -38,11 +41,12 @@
       </div>
     </section>
 
-
+    <!-- Résultat de la partie -->
     <section class="message">
       <p id="resultat"></p>
     </section>
 
+    <!-- Joueur -->
     <section class="zone">
       <h2 id="nomJoueur">Joueur</h2>
 
@@ -66,31 +70,34 @@
       </div>
     </section>
 
-
-    <section class="actions"></section>
+    <!-- Actions -->
+    <section class="actions">
       <button id="tirer">Tirer</button>
       <button id="rester">Rester</button>
+      <button id="doubler">Doubler</button>
       <button id="nouvellePartie">Nouvelle partie</button>
       <button id="regles">Règles du jeu</button>
     </section>
   
   </main>
 
+  <!-- Fenêtre des règles -->
   <div id="fenetreRegles">
     <div class="regles">
         <button id="fermerRegles">×</button>
 
         <h2>Règles du Blackjack</h2>
 
-        <p> Le but est d'obtenir un score le plus proche possible de 21.</p>
-        <p> Les cartes numérotées valent leur valeur.</p>
-        <p> Valet, Dame et Roi valent 10.</p>
-        <p> L'As vaut 11 ou 1 selon la situation.</p>
-        <p> Dépasser 21 fait perdre la partie.</p>
-        <p> Le croupier doit tirer jusqu'à atteindre au moins 17.</p>
-        <p> Un Blackjack correspond à 21 avec seulement deux cartes.</p>
+        <p>Le but est d'obtenir un score le plus proche possible de 21.</p>
+        <p>Les cartes numérotées valent leur valeur.</p>
+        <p>Valet, Dame et Roi valent 10.</p>
+        <p>L'As vaut 11 ou 1 selon la situation.</p>
+        <p>Dépasser 21 fait perdre la partie.</p>
+        <p>Le croupier doit tirer jusqu'à atteindre au moins 17.</p>
+        <p>Un Blackjack correspond à 21 avec seulement deux cartes.</p>
+
     </div>
-</div>
+  </div>
 
   <script src="script.js"></script>
 
